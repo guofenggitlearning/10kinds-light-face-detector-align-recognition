@@ -25,7 +25,8 @@ class libfacedet():
         self.net.setInput(blob)
         # output_names = ['loc', 'conf']
         # loc, conf = self.net.forward(output_names)
-        loc, conf = self.net.forward(self.net.getUnconnectedOutLayersNames())
+        #loc, conf = self.net.forward(self.net.getUnconnectedOutLayersNames())
+        conf, loc = self.net.forward(self.net.getUnconnectedOutLayersNames())
         # Decode bboxes and landmarks
         pb = PriorBox(input_shape=self.input_shape, output_shape=(w, h))
         dets = pb.decode(np.squeeze(loc, axis=0), np.squeeze(conf, axis=0))
